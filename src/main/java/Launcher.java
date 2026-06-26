@@ -1,3 +1,4 @@
+import entity.Player;
 import entity.WordMaker;
 import tool.WordsExtracter;
 
