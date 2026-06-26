@@ -1,5 +1,4 @@
 package entity;
-
 public class WordMaker {
     private String word;
 
@@ -19,7 +18,7 @@ public class WordMaker {
     }
 
     private String[] extractResources(){
-        
+
         return new String[1];
     }
 }
