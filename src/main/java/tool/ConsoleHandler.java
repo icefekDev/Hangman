@@ -5,7 +5,7 @@ public abstract class ConsoleHandler {
 
     //Returns user input in lower case
     public static String getInput() {
-        String value = "error";
+        String value = "";
         try {
             value = scanner.nextLine();
         } catch (Exception e) {

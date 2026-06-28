@@ -36,6 +36,9 @@ public class Player implements Resetable {
         while(playerInput.length() != 1){
             playerInput = getInput();
         }
+        if(!Character.isLetter(playerInput.charAt(0))){
+            return makeAssumption();
+        }
         return playerInput.charAt(0);
     }
 
