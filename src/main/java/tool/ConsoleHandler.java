@@ -1,5 +1,4 @@
 package tool;
-import java.io.IOException;
 import java.util.Scanner;
 public abstract class ConsoleHandler {
     private static final Scanner scanner = new Scanner(System.in);

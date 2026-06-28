@@ -2,6 +2,7 @@ import entity.HangmanUI;
 import entity.Judge;
 import entity.Player;
 import entity.WordPicker;
+import tool.ConsoleHandler;
 
 public class Launcher {
     public static void main(String[] args){
@@ -22,6 +23,7 @@ public class Launcher {
                 playerInput = player.getInput();
 
                 if(playerInput.equals("выход")){
+                    ConsoleHandler.closeScanner();
                     return;
                 }
             }

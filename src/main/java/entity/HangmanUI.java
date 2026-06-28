@@ -1,7 +1,6 @@
 package entity;
 
 public class HangmanUI {
-    private int state;
 
     public void drawWelcomeMessage(){
         System.out.println();

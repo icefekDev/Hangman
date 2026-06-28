@@ -12,7 +12,7 @@ public class WordPicker {
 
     private String pickWordFrom(String[] words){
         String pickedWord;
-        int index = (int) (Math.random() * words.length-1);
+        int index = (int) (Math.random() * words.length);
         pickedWord = words[index];
         return pickedWord;
     }
