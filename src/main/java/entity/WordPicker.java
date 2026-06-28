@@ -1,18 +1,13 @@
 package entity;
 import tool.WordsExtracter;
-public class WordMaker {
+public class WordPicker {
     private String word;
-    private int length;
     public String getWord(){
         return  word;
     }
 
-    public void setWord(){
+    public void pickWord(){
         word = pickWordFrom(WordsExtracter.getExtracted());
-        length = word.length();
-    }
-    public int getLength(){
-        return length;
     }
 
     private String pickWordFrom(String[] words){

@@ -2,16 +2,20 @@ package tool;
 import java.io.IOException;
 import java.util.Scanner;
 public abstract class ConsoleHandler {
+    private static final Scanner scanner = new Scanner(System.in);
 
-    public static String getInput(){
+    //Returns user input in lower case
+    public static String getInput() {
         String value = "error";
-
-        try( Scanner scanner = new Scanner(System.in)){
-            value = scanner.next();
-        }
-        catch (Exception e){
+        try {
+            value = scanner.nextLine();
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return value;
+        return value.toLowerCase();
+    }
+
+    public static void closeScanner(){
+        scanner.close();
     }
 }
