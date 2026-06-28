@@ -42,6 +42,11 @@ public class Launcher {
                 //User input block
                 hangmanUI.drawUserAnswerHeader();
                 char playerAssumption = player.makeAssumption();
+                for(char assumption : player.getAssumptions()){
+                    while (playerAssumption == assumption){
+                        playerAssumption = player.makeAssumption();
+                    }
+                }
                 hangmanUI.drawUserAnswerFooter();
 
                 player.addLetterToAssumptions(playerAssumption);
