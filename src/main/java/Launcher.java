@@ -6,6 +6,7 @@ import tool.ConsoleHandler;
 
 public class Launcher {
     public static void main(String[] args){
+        int MAX_MISTAKES = 5;
         HangmanUI hangmanUI = new HangmanUI();
         Judge judge = new Judge();
         WordPicker wordPicker = new WordPicker();
@@ -20,7 +21,7 @@ public class Launcher {
             //asking for exit or start the game
             while(!playerInput.equals("старт")){
                 hangmanUI.drawRestartSuggestion();
-                playerInput = player.getInput();
+                playerInput = player.saySomething();
 
                 if(playerInput.equals("выход")){
                     ConsoleHandler.closeScanner();
@@ -31,12 +32,13 @@ public class Launcher {
             // Do when new game starts
             hangmanUI.drawWelcomeMessage();
             wordPicker.pickWord();
-            judge.setUp(wordPicker.getWord());
+            judge.setOriginalWord(wordPicker.getWord());
+            judge.openRandomLetter();
 
             // Round loop
             while(isRoundContinue){
                 // Draw hangman block with hints
-                hangmanUI.drawHangman(player.getMistakes(),judge.getWordForUser());
+                hangmanUI.drawHangman(player.getMistakes(),judge.getSecretedWord());
                 hangmanUI.drawPreviousAssumptions(player.getAssumptions());
 
                 //User input block
@@ -52,9 +54,10 @@ public class Launcher {
                 player.addLetterToAssumptions(playerAssumption);
 
                 // Answer checking block
-                if(judge.checkIsLetterHere(playerAssumption)){
+                if(judge.isLetterInWord(playerAssumption)){
+                    judge.updateSecretedWord(playerAssumption);
                     hangmanUI.drawPlayerWasRight();
-                    if(judge.getWordForUser().equals(wordPicker.getWord())){
+                    if(judge.getSecretedWord().equals(wordPicker.getWord())){
                         hangmanUI.drawHangman(player.getMistakes(), wordPicker.getWord());
                         hangmanUI.drawPlayerWon();
                         isRoundContinue = false;
@@ -63,7 +66,7 @@ public class Launcher {
                 else{
                     player.increaseMistakes(1);
                     hangmanUI.drawPlayerWasWrong(player.getMistakes());
-                    if(player.getMistakes() == 5){
+                    if(player.getMistakes() == MAX_MISTAKES){
                         hangmanUI.drawHangman(player.getMistakes(), wordPicker.getWord());
                         isRoundContinue = false;
                     }

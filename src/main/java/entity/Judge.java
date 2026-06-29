@@ -2,50 +2,52 @@ package entity;
 
 public class Judge {
     private int wordLength;
-    private String wordOriginal;
-    private String wordForUser;
+    private String originalWord;
+    private String secretedWord;
 
-    public String getWordForUser(){
-        return wordForUser;
+    public String getSecretedWord(){
+        return secretedWord;
     }
 
-    public void setUp(String wordOriginal){
-        this.wordOriginal = wordOriginal;
-        wordLength = wordOriginal.length();
-        updateWordForUserOrGetFalse(chooseRandomLetterFromWord(),true);
+    public void setOriginalWord(String originalWord){
+        this.originalWord = originalWord;
+        wordLength = originalWord.length();
     }
 
-    public boolean checkIsLetterHere(char letter){
-        return updateWordForUserOrGetFalse(letter,false);
-    }
-
-    private boolean updateWordForUserOrGetFalse(char letterToCheck, boolean newTurn){
-        boolean wordForUserHasChanged = false;
-
-        wordForUser = newTurn ? "" : wordForUser;
-
-        StringBuilder wordForUserBuilder = new StringBuilder(wordForUser);
+    public void openRandomLetter(){
+        StringBuilder secretedWordBuilder = new StringBuilder();
+        char randomLetterFromWord = chooseRandomLetterFromWord();
 
         for(int i=0;i<wordLength;i++){
-
-            if(newTurn){
-                wordForUserBuilder.append("_");
+            secretedWordBuilder.append("_");
+            if(originalWord.charAt(i) == randomLetterFromWord){
+                secretedWordBuilder.setCharAt(i, randomLetterFromWord);
             }
+            secretedWord = secretedWordBuilder.toString();
+        }
+    }
 
-            // Open a letter if true
-            if(wordOriginal.charAt(i) == letterToCheck){
-                wordForUserBuilder.setCharAt(i, letterToCheck);
-                wordForUserHasChanged = true;
+    public boolean isLetterInWord(char letter){
+        for(int i=0;i<wordLength;i++){
+            if(originalWord.charAt(i) == letter){
+                return true;
             }
         }
+        return false;
+    }
 
-        wordForUser = wordForUserBuilder.toString();
-
-        return wordForUserHasChanged;
+    public void updateSecretedWord(char letter){
+        StringBuilder secretedWordBuilder = new StringBuilder(secretedWord);
+        for(int i=0;i<wordLength;i++){
+            if(originalWord.charAt(i) == letter){
+                secretedWordBuilder.setCharAt(i, letter);
+            }
+            secretedWord = secretedWordBuilder.toString();
+        }
     }
 
     private char chooseRandomLetterFromWord(){
-        return wordOriginal.charAt((int) (Math.random() * wordLength));
+        return originalWord.charAt((int) (Math.random() * wordLength));
     }
 
 

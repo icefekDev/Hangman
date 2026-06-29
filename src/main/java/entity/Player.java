@@ -26,20 +26,24 @@ public class Player implements Resetable {
         mistakes = mistakes+count;
     }
 
-    public String getInput(){
+    public String saySomething(){
         return ConsoleHandler.getInput();
     }
 
-    // getInput() until it's only one symbol
+    // saySomething() until it's only one symbol
     public char makeAssumption(){
-        String playerInput = getInput();
-        while(playerInput.length() != 1){
-            playerInput = getInput();
+        String speech = saySomething();
+        while(speech.length() != 1){
+            speech = saySomething();
         }
-        if(!Character.isLetter(playerInput.charAt(0))){
+        if(!isCyrillic(speech.charAt(0))){
             return makeAssumption();
         }
-        return playerInput.charAt(0);
+        return speech.charAt(0);
     }
-
+    private boolean isCyrillic(char letter){
+        char  FIRST_RUSSIAN_LETTER = 'а';
+        char LAST_RUSSIAN_LETTER = 'я';
+        return letter >= FIRST_RUSSIAN_LETTER && letter <= LAST_RUSSIAN_LETTER ;
+    }
 }
