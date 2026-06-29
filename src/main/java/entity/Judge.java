@@ -3,10 +3,10 @@ package entity;
 public class Judge {
     private int wordLength;
     private String originalWord;
-    private String secretedWord;
+    private String maskedWord;
 
-    public String getSecretedWord(){
-        return secretedWord;
+    public String getMaskedWord(){
+        return maskedWord;
     }
 
     public void setOriginalWord(String originalWord){
@@ -15,15 +15,15 @@ public class Judge {
     }
 
     public void openRandomLetter(){
-        StringBuilder secretedWordBuilder = new StringBuilder();
+        StringBuilder maskedWordBuilder = new StringBuilder();
         char randomLetterFromWord = chooseRandomLetterFromWord();
 
         for(int i=0;i<wordLength;i++){
-            secretedWordBuilder.append("_");
+            maskedWordBuilder.append("_");
             if(originalWord.charAt(i) == randomLetterFromWord){
-                secretedWordBuilder.setCharAt(i, randomLetterFromWord);
+                maskedWordBuilder.setCharAt(i, randomLetterFromWord);
             }
-            secretedWord = secretedWordBuilder.toString();
+            maskedWord = maskedWordBuilder.toString();
         }
     }
 
@@ -36,13 +36,13 @@ public class Judge {
         return false;
     }
 
-    public void updateSecretedWord(char letter){
-        StringBuilder secretedWordBuilder = new StringBuilder(secretedWord);
+    public void updateMaskedWord(char letter){
+        StringBuilder maskedWordBuilder = new StringBuilder(maskedWord);
         for(int i=0;i<wordLength;i++){
             if(originalWord.charAt(i) == letter){
-                secretedWordBuilder.setCharAt(i, letter);
+                maskedWordBuilder.setCharAt(i, letter);
             }
-            secretedWord = secretedWordBuilder.toString();
+            maskedWord = maskedWordBuilder.toString();
         }
     }
 
